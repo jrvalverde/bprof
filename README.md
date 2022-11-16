@@ -26,7 +26,7 @@ saved, which will be saved as a PNG file with the name similar to the output fil
 in 'png' (i.e. anything after the last dot is substituted by 'png': if the profiled script is 
 'test.sh' the plot will be 'test.png', if it was 'my.script', then 'my.png' will be produced).
 
-To run this script, download file 'bash_profile.bash' or 'bprof.bash' (at your own choice, both 
+*To run this script*, you only need to download the file 'bash_profile.bash' or 'bprof.bash' (at your own choice, both 
 are the same), make it executable (_chmod 755 bash_profile.bash_) and run it specifying the
 name of the bash script to profile and any arguments required by that script, e.g.
 
@@ -51,6 +51,9 @@ reading for the pipe will have to wait until the separate subprocess finishes, r
 in an artificially inflated time consumption. In other words, when interpreting the
 profiling data, you must be very careful and make sure you understand correctly what the
 profiled script is doing. Otherwise, surprising contradictions might occur.
+
+The other files in this project are a test script ('test.sh') and the output of the above
+two example commands (profiling of test.sh and profiling of bprof.sh analyzing test.sh)
 
 in short, *you should always make sure that you know what you are doing*.
 
