@@ -27,14 +27,14 @@ in 'png' (i.e. anything after the last dot is substituted by 'png': if the profi
 'test.sh' the plot will be 'test.png', if it was 'my.script', then 'my.png' will be produced).
 
 To run this script, download file 'bash_profile.bash' or 'bprof.bash' (at your own choice, both 
-are the same), make it executable (chmod 755 bash_profile.bash) and run it specifying the
+are the same), make it executable (_chmod 755 bash_profile.bash_) and run it specifying the
 name of the bash script to profile and any arguments required by that script, e.g.
 
-./bprof.bash test.sh
+_./bprof.bash test.sh_
 
 to profile 'test.bash' without arguments, or
 
-./bprof.bash bprof.bash test.sh
+_./bprof.bash bprof.bash test.sh_
 
 to profile 'bprof.bash' itself giving as argument 'test.sh' (i.e. while profiling 'test.sh')
 
@@ -52,6 +52,6 @@ in an artificially inflated time consumption. In other words, when interpreting 
 profiling data, you must be very careful and make sure you understand correctly what the
 profiled script is doing. Otherwise, surprising contradictions might occur.
 
-in short, you should always make sure that you know what you are doing.
+in short, *you should always make sure that you know what you are doing*.
 
 And that is all there is to it for now.
