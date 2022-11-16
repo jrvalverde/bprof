@@ -1,5 +1,5 @@
 # bprof
-A simple bash profiler written in Bash
+A simple Bash profiler written in Bash
 
 This is a simple script that I wrote to have a bash profiler.
 
