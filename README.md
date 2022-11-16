@@ -41,7 +41,7 @@ to profile 'bprof.bash' itself giving as argument 'test.sh' (i.e. while profilin
 This later example is worth for noting some special aspects/limitations: 'bprof.bash' will
 fork (i.e. run a separate subprocess) to run 'test.sh'. Profiling will proceed along the 
 main process (the profiler) but not along the subprocess, i.e. you will not get direct timing
-information about how long executing the subprocess took. 
+information about how long execution in the subprocess took. 
 
 The profiled script is run in a separate subprocess so we can redirect logging output to a 
 sink of our own choice. To hopefully reduce potentially huge (we do bioinformatics, sometimes
