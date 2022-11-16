@@ -104,7 +104,7 @@ if [ "$PLOT" = "yes" ] ; then
 	--ylabel "$c0" --style 0 'linewidth 3'\
 	--y2 1 --y2label "$c1" -style 1 'linewidth 3' \
 	--xmin 0 --ymin 0 --y2min 0 \
-	--terminal 'dumb 80,24' \
+	--terminal `echo "'dumb $(tput cols),$(tput lines)'"` \
 	--exit
     
     # get user onfirmation allowing for editing (-e)
