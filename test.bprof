@@ -1,0 +1,12 @@
+line	count	time	command
+0	1	.002349114	
+3	1	.003911926	msg='Hello world!'
+5	4	.021222184	for i in {0..3}
+7	4	.023981393	    echo $i
+8	4	.027413104	    time=$((i + 1))
+9	4	10.033327728	    sleep $time
+11	1	.005288389	echo $msg
+12	1	1.009129267	sleep 1
+13	1	.005516634	echo done
+15	1	.016629448	exit
+38	2	.008759562	# end

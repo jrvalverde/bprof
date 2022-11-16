@@ -1,0 +1,56 @@
+line	count	time	command
+0	1	.010672244	
+7	1	.004041212	cumtm=0		# cumulative time
+8	1	.005046771	prev=0		# previous line
+9	1	.008386089	cnt=0		# count of calls
+12	2	.010691453	if which feedgnuplot ; then PLOT=yes ; fi
+17	1	.002776626	script=$1
+18	1	.002523529	shname=${script%.*}	# remove from last dot to end
+19	2	.007599028	pipename=`mktemp -u bprof.XXXXXXXXX -p .`	# or $(mktemp -u etc.)
+21	1	.002509433	echo "line	count	time	command" > $shname.bprof
+23	1	.004025077	if ! mkfifo -m 600 "$pipename" ; then 
+28	1	.002689684	    echo "$pipename (OK)"
+33	1	-.000007477	    echo "Running $script"
+35	1	.002023833	    date "+%s.%N	(0) " > $pipename
+40	1	.002534842	    date "+%s.%N	(end) " > $pipename >> $pipename
+41	1	.004739529	    exit
+44	1	.002537484	echo "Processing $pipename"
+47	1	.001597503	tail -f -n +1 $pipename \
+48	25	10.363827639	| while read tm ln trail; do
+50	75	.244866926	    ln=`echo $ln | tr -d '()'`
+51	25	.089938857	    if [ "$ln" = "0" ] ; then
+53	1	.002677616	        prevtm=$tm
+54	1	.002418644		prevln=$ln
+55	1	.003428153		continue
+58	72	.205904424	    delta=$(echo "$tm - $prevtm" | bc -l)
+59	24	.069472938	    txt=''
+60	24	.064681011	    echo "$prevln	$delta	$txt"
+61	24	.069553014	    prevtm=$tm
+62	24	.067657132	    prevln=$ln
+64	26	.074453469	    if [ "$ln" = "end" ] ; then echo "9999999999	0"; break ; fi
+67	1	.005133821	| sort -n \
+68	26	.065444961	| while read ln tm trail ; do
+69	25	.087005080	    if [ "$ln" = "$prev" ] ; then
+70	42	.116248428	        cumtm=`echo "$cumtm + $tm" | bc -l`
+71	14	.032670314		cnt=$(( cnt + 1 ))
+74	33	.086137841	        txt=`head -$prev $script | tail -1`
+75	11	.025599065	        echo "$prev	$cnt	$cumtm	$txt"
+76	11	.027032980		cumtm=$tm
+77	11	.028392510		cnt=1
+79	25	.065104026	    prev=$ln
+84	1	.004112842	rm $pipename
+88	1	.002597395	if [ "$PLOT" = "yes" ] ; then
+90	2	.012954342	    read cx c0 c1 c2 <<< $(head -1 test.bprof)
+92	1	.146077932	    cat $shname.bprof \
+93	1	.000845046	    | cut -f1,2,3 \
+94	1	.002769015	    | tail -n +2 \
+95	1	.000859566	    | feedgnuplot --domain \
+108	1	.001528689	    read -e -p "Do you want a copy of the plot [Y/n]? " yn
+110	1	.004280060	    yn=${yn:0:1}
+112	1	.002433265	    if [ -z "$yn" -o "${yn,,}" = 'y' ] ; then
+113	1	.654902420	        cat $shname.bprof \
+114	1	.000197931		| cut -f1,2,3 \
+115	1	.000065623		| tail -n +2 \
+116	1	.001101613		| feedgnuplot --domain \
+128	1	6.199808387		display $shname.png
+132	1	.002230300	exit
