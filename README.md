@@ -20,18 +20,6 @@ The '*.bprof' file is a tab-separated file containing the line number, count of 
 line has been executed and cumulative time spent in that line, for each executed line, sorted
 in line (script) order.
 
-You may want to further process this file yourself, e.g. reverse sorting by running time to
-find which lines consume most time
-
-_sort -r -n -k3 test.bprof_
-
-or reverse sorting on execution counts to find which lines are executed most times
-
-_sort -r -n -k2 test.bprof_
-
-or computing the quotient between number of times called and cumulative execution time, or
-any other such that you like.
-
 If 'feedgnuplot' is installed, then an ASCII plot of line execution counts and times will also
 be produced on the terminal screen, followed by a prompt asking if you want a graphical plot
 saved, which will be saved as a PNG file with the name similar to the output file but ending 
@@ -66,6 +54,20 @@ profiled script is doing. Otherwise, surprising contradictions might occur.
 
 The other files in this project are a test script ('test.sh') and the output of the above
 two example commands (profiling of test.sh and profiling of bprof.sh analyzing test.sh)
+
+
+You may want to further process the output '.bprof' file yourself, e.g. reverse sorting by running time to
+find which lines consume most time, e.g.
+
+_sort -r -n -k3 test.bprof_
+
+or reverse sorting on execution counts to find which lines are executed most times, e.g.
+
+_sort -r -n -k2 test.bprof_
+
+or computing the quotient between number of times called and cumulative execution time, or
+any other such that you like.
+
 
 in short, *you should always make sure that you know what you are doing*.
 
